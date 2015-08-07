@@ -13,14 +13,13 @@ TrelloClone.Views.ListForm = Backbone.View.extend({
   addList: function (e) {
     e.preventDefault();
     var listData = $(e.currentTarget).serializeJSON();
-    debugger;
     this.model.save(listData, {
       success: function () {
         this.board.lists().add(this.model);
         Backbone.history.navigate('api/boards/' + this.board.id, { trigger: true });
       }.bind(this),
 
-      failure: function (model, response) {
+      error: function (model, response) {
         this.$('.form-errors').empty();
         JSON.parse(response.responseText).forEach(function (errorText) {
           this.$('.form-errors').append('<li>' + errorText + '</li>');

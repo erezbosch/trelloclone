@@ -8,7 +8,7 @@ class Api::CardsController < ApplicationController
     @card = Card.new(card_params)
     @card.ord = -1
     if @card.save
-      @card.ord = @card.id
+      @card.update(ord: @card.id)
       render json: @card
     else
       render json: @card.errors.full_messages, status: 422

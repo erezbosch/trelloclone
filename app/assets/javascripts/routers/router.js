@@ -43,9 +43,10 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
   },
 
   newList: function (boardId) {
+    var board = this.boards.getOrFetch(boardId);
     var view = new TrelloClone.Views.ListForm({
-      board: this.boards.getOrFetch(boardId),
-      model: new TrelloClone.Models.List(),
+      board: board,
+      model: new TrelloClone.Models.List({ board: board }),
     });
     view.model.fetch();
     this._swapView(view);

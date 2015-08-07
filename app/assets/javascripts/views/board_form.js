@@ -18,7 +18,7 @@ TrelloClone.Views.BoardForm = Backbone.View.extend({
         Backbone.history.navigate('api/boards/' + this.model.id, { trigger: true });
       }.bind(this),
 
-      failure: function (model, response) {
+      error: function (model, response) {
         this.$('.form-errors').empty();
         JSON.parse(response.responseText).forEach(function (errorText) {
           this.$('.form-errors').append('<li>' + errorText + '</li>');

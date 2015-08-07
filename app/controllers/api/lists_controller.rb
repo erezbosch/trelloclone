@@ -9,7 +9,7 @@ class Api::ListsController < ApplicationController
     @list = board.lists.new(list_params)
     @list.ord = -1
     if @list.save
-      @list.ord = @list.id
+      @list.update(ord: @list.id)
       render json: @list
     else
       render json: @list.errors.full_messages, status: 422
