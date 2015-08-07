@@ -3,10 +3,10 @@
   <tbody>
     <% boards.each(function (board) { %>
         <tr>
-          <td><a href="#boards/<%= board.id %>">
+          <td><a href="#api/boards/<%= board.id %>">
             <%= board.escape("title") %>
           </a></td>
-          <td><a href="#boards/<%= board.id %>/edit">
+          <td><a href="#api/boards/<%= board.id %>/edit">
             Edit
           </a></td>
         </tr>
@@ -14,4 +14,4 @@
   </tbody>
 </table>
 
-<a href="#/boards/new">Create New Board</a>
+<a href="#api/boards/new">Create New Board</a>

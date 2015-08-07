@@ -1,0 +1,11 @@
+<ul class='form-errors'></ul>
+
+<form class="list-form">
+  <label for="list_title">List Title</label>
+  <input type="text"
+         name="list[title]"
+         value="<%= list.escape('title') %>"
+         id="list_title">
+
+  <input type="submit">
+</form>

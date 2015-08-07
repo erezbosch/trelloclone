@@ -1,6 +1,14 @@
 TrelloClone.Collections.Lists = Backbone.Collection.extend({
-  url: 'api/lists',
+  url: function () {
+    return this.board.url() + '/lists';
+  },
+
   model: TrelloClone.Models.List,
+  comparator: 'ord',
+
+  initialize: function (array, options) {
+    this.board = options.board;
+  },
 
   getOrFetch: function (id) {
     var list = this.get(id);
@@ -11,4 +19,4 @@ TrelloClone.Collections.Lists = Backbone.Collection.extend({
     list.fetch();
     return list;
   },
-})
+});

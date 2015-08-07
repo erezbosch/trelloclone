@@ -6,6 +6,7 @@ class Api::CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
+    @card.ord = -1
     if @card.save
       @card.ord = @card.id
       render json: @card
