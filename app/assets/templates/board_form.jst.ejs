@@ -1,0 +1,11 @@
+<ul class='form-errors'></ul>
+
+<form class="board-form">
+  <label for="board_title">Board Title</label>
+  <input type="text"
+         name="board[title]"
+         value="<%= board.escape('title') %>"
+         id="board_title">
+
+  <input type="submit">
+</form>
