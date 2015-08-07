@@ -1,10 +1,15 @@
 <table class="table table-striped">
   <thead><tr><td><strong>Boards</strong></td></tr></thead>
   <tbody>
-    <% boards.each(function(board){ %>
-        <tr><td><a href="#boards/<%= board.id %>">
-          <%= board.escape("title") %>
-        </a></td></tr>
+    <% boards.each(function (board) { %>
+        <tr>
+          <td><a href="#boards/<%= board.id %>">
+            <%= board.escape("title") %>
+          </a></td>
+          <td><a href="#boards/<%= board.id %>/edit">
+            Edit
+          </a></td>
+        </tr>
     <%}) %>
   </tbody>
 </table>
