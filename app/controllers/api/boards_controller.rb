@@ -1,4 +1,4 @@
-class BoardsController < ApplicationController
+class Api::BoardsController < ApplicationController
   def index
     @boards = Board.order(:id)
     render json: @boards

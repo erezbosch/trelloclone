@@ -1,4 +1,4 @@
-class CardsController < ApplicationController
+class Api::CardsController < ApplicationController
   def index
     @cards = Card.order(:id)
     render json: @cards
