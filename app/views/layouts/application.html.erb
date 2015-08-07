@@ -7,11 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="container">
+<% if flash[:errors] %>
+  <ul>
+    <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
 
+<ul class="nav nav-pills">
+  <li><a href="" class="btn btn-primary">Back To Index</a></li>
+  <% if current_user %>
+    <li><a class="btn btn-success" href="#feeds/favorites">Your Favorite Feeds</a></li>
+    <li><%= link_to "Logout", session_url, method: :delete %></li>
+  <% else %>
+    <li><a class="btn btn-danger" href="/session/new">Log In</a></li>
+    <li><a href="/users/new" class="btn btn-warning">Sign Up</a></li>
+  <% end %>
+</ul>
 <%= yield %>
 <div class="trello row">
   <div class="content col-xs-8 col-xs-offset-2">
-    
+
   </div>
 </div>
 

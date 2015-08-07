@@ -6,6 +6,7 @@ class BoardsController < ApplicationController
 
   def create
     @board = Board.new(board_params)
+    @board.user = current_user
     if @board.save
       render json: @board
     else
