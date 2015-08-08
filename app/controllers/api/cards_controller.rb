@@ -1,7 +1,7 @@
 class Api::CardsController < ApplicationController
   def index
-    @cards = Card.order(:id)
-    render json: @cards
+    @list = List.find(params[:list_id])
+    render json: @list.cards
   end
 
   def create

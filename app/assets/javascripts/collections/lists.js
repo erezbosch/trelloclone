@@ -13,10 +13,11 @@ TrelloClone.Collections.Lists = Backbone.Collection.extend({
   getOrFetch: function (id) {
     var list = this.get(id);
     if (!list) {
-      list = new TrelloClone.Models.List({ id: id });
-      this.add(list);
+      list = new TrelloClone.Models.List({ id: id, board: this.board });
+      list.fetch({ success: function () { this.add(list); }.bind(this) });
+    } else {
+      list.fetch();
     }
-    list.fetch();
     return list;
   },
 });

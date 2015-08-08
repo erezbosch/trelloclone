@@ -6,9 +6,10 @@ TrelloClone.Collections.Boards = Backbone.Collection.extend({
     var board = this.get(id);
     if (!board) {
       board = new TrelloClone.Models.Board({ id: id });
-      this.add(board);
+      board.fetch({ success: function () { this.add(board); }.bind(this) });
+    } else {
+      board.fetch();
     }
-    board.fetch();
     return board;
   },
 });
