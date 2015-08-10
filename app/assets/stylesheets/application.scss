@@ -19,3 +19,10 @@
 li.error {
   color: #f00;
 }
+
+.card-form > label > *, .list-form > input:not(:last-of-type) {
+  background: #008;
+  border: 0;
+  border-radius: 10px;
+  margin: 5px auto;
+}

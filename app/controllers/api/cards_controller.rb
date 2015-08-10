@@ -1,6 +1,7 @@
 class Api::CardsController < ApplicationController
   def create
-    @card = Card.new(card_params)
+    list = List.find(params[:list_id])
+    @card = list.cards.new(card_params)
     @card.ord = -1
     if @card.save
       @card.update(ord: @card.id)
@@ -27,6 +28,6 @@ class Api::CardsController < ApplicationController
 
   private
   def card_params
-    params.require(:card).permit(:title, :description, :ord)
+    params.require(:card).permit(:title, :description)
   end
 end

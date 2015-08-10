@@ -1,20 +1,20 @@
-TrelloClone.Views.ListForm = Backbone.View.extend({
-  template: JST['list_form'],
-  className: 'list-form list',
+TrelloClone.Views.CardForm = Backbone.View.extend({
+  template: JST['card_form'],
+  className: 'card-form card',
   tagName: 'form',
 
   events: {
-    'submit': 'addList',
+    'submit': 'addCard',
   },
 
   initialize: function (options) {
     this.listenTo(this.model, "sync", this.render);
   },
 
-  addList: function (e) {
+  addCard: function (e) {
     e.preventDefault();
-    var listData = $(e.currentTarget).serializeJSON();
-    this.model.save(listData, {
+    var cardData = $(e.currentTarget).serializeJSON();
+    this.model.save(cardData, {
       success: function () {
         this.collection.add(this.model);
         this.$(':input').val('');
@@ -23,7 +23,7 @@ TrelloClone.Views.ListForm = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.html(this.template({ list: this.model }));
+    this.$el.html(this.template());
     return this;
   }
 });
