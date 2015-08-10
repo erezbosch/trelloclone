@@ -23,8 +23,8 @@ class Api::ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:id]), include: :cards
-    render json: @list
+    @list = List.find(params[:id])
+    render json: @list, include: :cards
   end
 
   def update
