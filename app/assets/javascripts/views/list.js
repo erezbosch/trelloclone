@@ -19,6 +19,7 @@ TrelloClone.Views.List = Backbone.CompositeView.extend({
   render: function () {
     this.$el.html(this.template({ list: this.model }));
     this.attachSubviews();
+    this.$el.attr('data-id', this.model.id);
     return this;
   },
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150807175038) do
+ActiveRecord::Schema.define(version: 20150810232424) do
 
   create_table "board_members", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20150807175038) do
   end
 
   add_index "cards", ["list_id"], name: "index_cards_on_list_id"
-  add_index "cards", ["ord"], name: "index_cards_on_ord", unique: true
 
   create_table "items", force: :cascade do |t|
     t.integer  "card_id",                    null: false
@@ -73,7 +72,6 @@ ActiveRecord::Schema.define(version: 20150807175038) do
   end
 
   add_index "lists", ["board_id"], name: "index_lists_on_board_id"
-  add_index "lists", ["ord"], name: "index_lists_on_ord", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false

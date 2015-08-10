@@ -18,7 +18,32 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
   render: function () {
     this.$el.html(this.template({ board: this.model }));
     this.attachSubviews();
-    return this;
+    this.onRender();
+  },
+
+  onRender: function () {
+    this.$('.lists').sortable({
+      start: function (e, ui) {
+        ui.item.data('start-idx', ui.item.index());
+      },
+
+      stop: function (e, ui) {
+        var startIdx = ui.item.data('start-idx');
+        var endIdx = ui.item.index();
+        var change = endIdx > startIdx ? 1 : (endIdx === startIdx ? 0 : -1);
+        var compareDiv = this.$('.lists').find('.list').eq(endIdx - change);
+        var compareList = this.model.lists().get(compareDiv.attr('data-id'));
+        var newOrd = compareList.get('ord') + change;
+        var target = this.model.lists().get(ui.item.attr('data-id'));
+        debugger;
+        target.save({ ord: newOrd }, {
+          success: function () {
+            console.log("OMG");
+          }
+        });
+      }.bind(this)
+    });
+    Backbone.CompositeView.prototype.onRender.call(this);
   },
 
   addListView: function (list) {
