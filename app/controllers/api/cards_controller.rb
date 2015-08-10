@@ -1,9 +1,4 @@
 class Api::CardsController < ApplicationController
-  def index
-    @list = List.find(params[:list_id])
-    render json: @list.cards
-  end
-
   def create
     @card = Card.new(card_params)
     @card.ord = -1
@@ -18,11 +13,6 @@ class Api::CardsController < ApplicationController
   def destroy
     @card = Card.find(params[:id])
     @card.destroy
-    render json: @card
-  end
-
-  def show
-    @card = Card.find(params[:id])
     render json: @card
   end
 

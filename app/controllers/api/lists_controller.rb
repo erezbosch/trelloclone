@@ -1,9 +1,4 @@
 class Api::ListsController < ApplicationController
-  def index
-    board = Board.find(params[:board_id])
-    render json: board.lists
-  end
-
   def create
     board = Board.find(params[:board_id])
     @list = board.lists.new(list_params)
@@ -20,11 +15,6 @@ class Api::ListsController < ApplicationController
     @list = List.find(params[:id])
     @list.destroy
     render json: @list
-  end
-
-  def show
-    @list = List.find(params[:id])
-    render json: @list, include: :cards
   end
 
   def update

@@ -3,7 +3,6 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
     "": "boardsIndex",
     "api/boards/new": "newBoard",
     "api/boards/:id/edit": "editBoard",
-    "api/boards/:boardId/lists/new": "newList",
     "api/boards/:id": "showBoard",
   },
 
@@ -22,7 +21,6 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
       collection: this.boards,
       model: new TrelloClone.Models.Board(),
     });
-    view.model.fetch();
     this._swapView(view);
   },
 
@@ -38,16 +36,6 @@ TrelloClone.Routers.Router = Backbone.Router.extend({
       collection: this.boards,
       model: this.boards.getOrFetch(id),
     });
-    this._swapView(view);
-  },
-
-  newList: function (boardId) {
-    var board = this.boards.getOrFetch(boardId);
-    var view = new TrelloClone.Views.ListForm({
-      board: board,
-      model: new TrelloClone.Models.List({ board: board }),
-    });
-    view.model.fetch();
     this._swapView(view);
   },
 
