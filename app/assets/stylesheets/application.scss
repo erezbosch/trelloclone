@@ -26,3 +26,37 @@ li.error {
   border-radius: 10px;
   margin: 5px auto;
 }
+
+ul.cards {
+  width: 100%;
+  padding: 0;
+}
+
+.card {
+  color: #fff;
+  background: #33b;
+  border-radius: 20px;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  margin: 5px auto;
+}
+
+.card > .delete {
+  display: none;
+}
+
+.card:hover > .delete {
+  display: block;
+}
+
+.list {
+  color: #fff;
+  background: #55f;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.list > ul {
+  list-style: none;
+}

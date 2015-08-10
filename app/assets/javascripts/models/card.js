@@ -1,6 +1,6 @@
 TrelloClone.Models.Card = Backbone.Model.extend({
   urlRoot: function () {
-    return 'api/lists/' + this.list.id + '/cards';
+    return 'api/lists/' + (this.get('list_id') || this.list.id) + '/cards';
   },
 
   initialize: function (options) {
