@@ -41,26 +41,33 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
       },
 
       stop: function (e, ui) {
-        var startListId = ui.item.data('start-list-id');
-        var endListId = ui.item.parent().parent().attr('data-id');
-        var endList = this.model.lists().get(endListId);
-        if (startListId === endListId) {
-          var startIdx = ui.item.data('start-idx');
-          var endIdx = ui.item.index();
-          var change = endIdx > startIdx ? 1 : (endIdx === startIdx ? 0 : -1);
-          var compareDiv = ui.item.parent().find('.card').eq(endIdx - change);
-          debugger;
-          var compareCard = endList.cards().get(compareDiv.attr('data-id'));
-          var newOrd = compareCard.get('ord') + change;
-          var target = endList.cards().get(ui.item.attr('data-id'));
-          target.save({ ord: newOrd }, {
-            success: function () {
-              console.log("OMG");
-            }
-          });
-        }
+        this.moveCard(ui);
+
       }.bind(this)
     });
+  },
+
+  moveCard: function (ui) {
+    var startListId = ui.item.data('start-list-id');
+    var startList = this.model.lists().get(startListId);
+    var endListId = ui.item.parent().parent().attr('data-id');
+    var endList = this.model.lists().get(endListId);
+    var endIdx = ui.item.index();
+    var target = startList.cards().get(ui.item.attr('data-id'));
+    var ordChange;
+    if (startListId === endListId) {
+      var startIdx = ui.item.data('start-idx');
+      ordChange = endIdx > startIdx ? 1 : (endIdx === startIdx ? 0 : -1);
+    } else if (ui.item.parent().find('.card').length === 1) {
+      ordChange = 0;
+    } else {
+      ordChange = endIdx === 0 ? -1 : 1;
+    }
+    var compareDiv = ui.item.parent().find('.card').eq(endIdx - ordChange);
+    var compareCard = endList.cards().get(compareDiv.attr('data-id'));
+    var newOrd = compareCard.get('ord') + ordChange;
+    endList.differentiateOrds(newOrd, ordChange);
+    target.save({ ord: newOrd, list_id: endListId });
   },
 
   listsSortable: function () {
