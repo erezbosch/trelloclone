@@ -42,7 +42,6 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
 
       stop: function (e, ui) {
         this.moveCard(ui);
-
       }.bind(this)
     });
   },
@@ -66,7 +65,11 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
     var compareDiv = ui.item.parent().find('.card').eq(endIdx - ordChange);
     var compareCard = endList.cards().get(compareDiv.attr('data-id'));
     var newOrd = compareCard.get('ord') + ordChange;
-    endList.differentiateOrds(newOrd, ordChange);
+    if (ordChange === 1) {
+      endList.differentiateOrdsByIncreasing(newOrd);
+    } else {
+      endList.differentiateOrdsByDecreasing(newOrd);
+    }
     target.save({ ord: newOrd, list_id: endListId });
   },
 

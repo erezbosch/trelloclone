@@ -19,5 +19,23 @@ TrelloClone.Models.List = Backbone.Model.extend({
       delete payload.cards;
     }
     return payload;
+  },
+
+  differentiateOrdsByIncreasing: function (number) {
+    this.cards().each(function (card) {
+      if (card.get('ord') === number) {
+        number++;
+        card.save({ ord: number });
+      }
+    });
+  },
+
+  differentiateOrdsByDecreasing: function (number) {
+    for (var i = this.cards().length - 1; i >= 0; i--) {
+      if (this.cards().models[i].get('ord') === number) {
+        number--;
+        card.save({ ord: number });
+      }
+    }
   }
 });
